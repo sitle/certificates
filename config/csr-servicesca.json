@@ -1,0 +1,17 @@
+{
+    "CN": "GOUV.PF Services CA",
+    "key": {
+        "algo": "rsa",
+        "size": 4096
+    },
+    "names": [{
+        "C": "PF",
+        "ST": "Papeete",
+        "L": "Polynésie française",
+        "O": "Gouvernement de la Polynésie française",
+        "OU": "SIPF"
+    }],
+    "ca": {
+        "expiry": "43800h"
+    }
+}
