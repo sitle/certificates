@@ -28,3 +28,5 @@ If you need to customize, you have to edit this files :
 ```bash
 ./api-launch.sh
 ```
+
+** Be aware that the API is not secured before expose it to the public world ! **
