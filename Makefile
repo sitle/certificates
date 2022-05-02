@@ -33,4 +33,3 @@ setup: reset db
 	@wget -c https://github.com/cloudflare/cfssl/releases/download/v1.6.1/multirootca_1.6.1_linux_amd64 -O ./bin/multirootca
 	@chmod +x ./bin/*
 	@sudo cp -pfr ./bin/cfssl* ./bin/mkbundle ./bin/multirootca /usr/local/bin/
-	
