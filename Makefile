@@ -19,9 +19,10 @@ servicesca:
 	@cfssl sign -ca ./certs/rootca/gouv.pf-rootca.pem -ca-key ./certs/rootca/gouv.pf-rootca-key.pem -config ./config/config-sca.json ./certs/servicesca/gouv.pf-servicesca.csr | cfssljson -bare ./certs/servicesca/gouv.pf-servicesca
 	@ls -l ./certs/servicesca/*
 
-setup:
-	@rm -fr ./bin/*
-	@rm -fr ./database/certstore.db
+db:
+	@cat ./config/setup-db.sql | sqlite3 ./database/certstore.db
+
+setup: reset db
 	@wget -c https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl-bundle_1.6.1_linux_amd64 -O ./bin/cfssl-bundle
 	@wget -c https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl-certinfo_1.6.1_linux_amd64 -O ./bin/cfssl-certinfo
 	@wget -c https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl-newkey_1.6.1_linux_amd64 -O ./bin/cfssl-newkey
@@ -32,4 +33,4 @@ setup:
 	@wget -c https://github.com/cloudflare/cfssl/releases/download/v1.6.1/multirootca_1.6.1_linux_amd64 -O ./bin/multirootca
 	@chmod +x ./bin/*
 	@sudo cp -pfr ./bin/cfssl* ./bin/mkbundle ./bin/multirootca /usr/local/bin/
-	@cat ./config/setup-db.sql | sqlite3 ./database/certstore.db
+	
