@@ -1,6 +1,6 @@
 # xD
 
-all: clean regen
+all: clean db regen
 
 clean:
 	@rm -fr ./certs/rootca/*
@@ -24,7 +24,9 @@ servicesca:
 db:
 	@cat ./config/setup-db.sql | sqlite3 ./database/certstore.db
 
-setup: reset db regen
+setup: reset db download regen
+
+download:
 	@wget -c https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl-bundle_1.6.1_linux_amd64 -O ./bin/cfssl-bundle
 	@wget -c https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl-certinfo_1.6.1_linux_amd64 -O ./bin/cfssl-certinfo
 	@wget -c https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl-newkey_1.6.1_linux_amd64 -O ./bin/cfssl-newkey
