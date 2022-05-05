@@ -1,14 +1,16 @@
 # xD
 
-all: clean rootca servicesca
+all: clean regen
 
 clean:
 	@rm -fr ./certs/rootca/*
 	@rm -fr ./certs/servicesca/*
+	@rm -fr ./database/certstore.db
 
 reset: clean
 	@rm -fr ./bin/*
-	@rm -fr ./database/certstore.db
+
+regen: rootca servicesca
 
 rootca:
 	@cfssl gencert -config ./config/config-rca.json -initca ./config/csr-rootca.json | cfssljson -bare ./certs/rootca/gouv.pf-rootca
@@ -22,7 +24,7 @@ servicesca:
 db:
 	@cat ./config/setup-db.sql | sqlite3 ./database/certstore.db
 
-setup: reset db
+setup: reset db regen
 	@wget -c https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl-bundle_1.6.1_linux_amd64 -O ./bin/cfssl-bundle
 	@wget -c https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl-certinfo_1.6.1_linux_amd64 -O ./bin/cfssl-certinfo
 	@wget -c https://github.com/cloudflare/cfssl/releases/download/v1.6.1/cfssl-newkey_1.6.1_linux_amd64 -O ./bin/cfssl-newkey
