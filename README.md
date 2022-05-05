@@ -1,11 +1,18 @@
 Howto create a Public Key Infrastructure ?
 
+## Terms & condition
+
+* Root CA expire in 10 years.
+* Services CA expire in 5 years.
+* Services CA can sign certificates.
+
 ## Prerequisite
 
 You need to install this prerequisite :
 
 * make
 * wget
+* sqlite3
 
 ## Setting up
 
