@@ -7,7 +7,7 @@
                 "crl sign",
                 "signing"
             ],
-            "expiry": "87600h",
+            "expiry": "43800h",
             "ca_constraint": {
                 "is_ca": true,
                 "max_path_len":0,
